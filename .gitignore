@@ -56,3 +56,4 @@ dkms.conf
 *.db
 .vs/
 PCD2RE/x64
+*.txt

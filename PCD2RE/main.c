@@ -1,18 +1,18 @@
 #include "necessaryIncludes.h"
 #include "member.h"
-
+#include <time.h>
 int printMenu()
 {
 	printf
 	(
-		"-----------------------------|\n"
+		"------------------------------\n"
 		"|   System for MLM Company   |\n"
 		"|----------------------------|\n"
 		"|1. Member information module|\n"
 		"|2. Staff information module |\n"
 		"|3. Stock information module |\n"
 		"|4. Exit                     |\n"
-		" ----------------------------\n"
+		"------------------------------\n"
 		"Enter your choice: "
 	);
 	int selection;
@@ -26,6 +26,7 @@ int printMenu()
 }
 void main()
 {
+	srand((unsigned int)time(NULL));
 	while (1)
 	{
 		system("cls");
@@ -36,10 +37,10 @@ void main()
 			member();
 			break;
 		case 2:
-			staff();
+			//staff();
 			break;
 		case 3:
-			stock();
+			//stock();
 			break;
 		case 4:
 			printf("See you next time\n");

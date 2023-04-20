@@ -6,7 +6,20 @@
 #include <windows.h>
 #pragma warning (disable:4996)
 
-char* IDGen(char* ID, const char* name)
+int checkSentinent(char* str)
+{
+	return strcmp(str, "-1") == 0;
+}
+
+void dprintf(int n)
+{
+	int i = 0;
+	for (i = 0; i < n; i++)
+		printf("-");
+	printf("\n");
+}
+
+void IDGen(char ID[], const char* name)
 {
 	int i = 0, j = 0;
 	char temp[11] = { 0 };
@@ -17,7 +30,6 @@ char* IDGen(char* ID, const char* name)
 	for (i = 6; i < 10; i++)
 		temp[i] = rand() % 26 + 65;
 	strcpy(ID, temp);
-	return ID; // 3 letters of name + 3 random numbers + 5 random letters
 }
 
 void generateLog(const char* context, const char* by_who, const int level)
@@ -35,7 +47,7 @@ void generateLog(const char* context, const char* by_who, const int level)
 	strcat(f_context, by_who);
 	strcat(f_context, " : ");
 	strcat(f_context, context);
-	fprintf(f, "%s\n", f_context);
+	fprintf(f, " %s\n", f_context);
 	fclose(f);
 }
 
