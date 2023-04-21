@@ -6,5 +6,7 @@
   <ItemGroup>
     <ClInclude Include="necessaryIncludes.h" />
     <ClInclude Include="member.h" />
+    <ClInclude Include="staff.h" />
+    <ClInclude Include="stock.h" />
   </ItemGroup>
 </Project>

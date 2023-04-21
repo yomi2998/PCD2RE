@@ -1,6 +1,14 @@
 #include "necessaryIncludes.h"
 #include "member.h"
+#include "staff.h"
+#include "stock.h"
 #include <time.h>
+/*
+main.c
+This is the main function of the program
+It will print the main menu and call the function of the selected module
+necessaryIncludes.h provides some basic information check, structures, ID generator and more.
+*/
 int printMenu()
 {
 	printf
@@ -37,10 +45,10 @@ void main()
 			member();
 			break;
 		case 2:
-			//staff();
+			staff();
 			break;
 		case 3:
-			//stock();
+			stock();
 			break;
 		case 4:
 			printf("See you next time\n");

@@ -132,6 +132,8 @@
   <ItemGroup>
     <ClInclude Include="member.h" />
     <ClInclude Include="necessaryIncludes.h" />
+    <ClInclude Include="staff.h" />
+    <ClInclude Include="stock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
