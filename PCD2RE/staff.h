@@ -567,7 +567,7 @@ void addStaff()
 
 		Staff staff;
 		IDGen(staff.staff_id, "STAFF");
-		printf("Staff ID: %s", staff.staff_id);
+		printf("Staff ID: %s\n", staff.staff_id);
 		do
 		{
 			memset(staff.name, 0, sizeof(staff.name));

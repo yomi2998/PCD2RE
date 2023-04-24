@@ -573,6 +573,7 @@ void addMember()
 
 		Member member;
 		IDGen(member.member_id, "MEMBER");
+		printf("Member ID: %s\n", member.member_id);
 		do
 		{
 			memset(member.name, 0, sizeof(member.name));
