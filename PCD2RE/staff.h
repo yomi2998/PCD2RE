@@ -1,5 +1,5 @@
 #include "necessaryIncludes.h"
-
+// Eugene Lim Wei Han
 void displayStaff()
 {
 	system("cls");
@@ -523,7 +523,6 @@ void deleteStaff()
 		}
 		else
 		{
-			// Confirm with the user before deleting the staff
 			printf("Are you sure you want to delete this staff? (y/n): ");
 			char confirm;
 			scanf(" %c", &confirm);
@@ -981,13 +980,21 @@ void updateStaffPosition()
 					"Staff ID: %s\n"
 					"Staff name: %s\n"
 					"Staff position: %s\n"
-					"\nEnter new position: ",
+					"\nEnter new position (-1 to cancel): ",
 					staff.staff_id,
 					staff.name,
 					staff.position
 				);
 
 				scanf(" %s", staff.position);
+
+				if (checkSentinent(staff.position))
+				{
+					fclose(fp);
+					fclose(temp);
+					remove("temp.txt");
+					return;
+				}
 			}
 			fprintf(temp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 				staff.staff_id,
@@ -1048,7 +1055,7 @@ int printStaffMenu()
 
 void staff()
 {
-	FILE* cr8file = fopen("staff.txt", "a");
+	FILE* cr8file = fopen("staff.txt", "a"); // create file if not exist
 	fclose(cr8file);
 	while (1)
 	{

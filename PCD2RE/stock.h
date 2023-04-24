@@ -1,5 +1,5 @@
 #include "necessaryIncludes.h"
-
+// Siew Jun Hong
 void displayStock()
 {
 	system("cls");
@@ -693,7 +693,7 @@ void addStock()
 	}
 }
 
-void displayStockSaleStatus()
+void displayStockSale()
 {
 	system("cls");
 	FILE* fp = fopen("stock.bin", "rb");
@@ -740,7 +740,7 @@ void updateStockSale()
 			system("pause");
 			return;
 		}
-		displayStockSaleStatus();
+		displayStockSale();
 		Stock stock;
 		int found = 0;
 		char stock_id[11];
@@ -803,7 +803,7 @@ void updateStockSale()
 
 void stock()
 {
-	FILE* cr8file = fopen("stock.bin", "ab");
+	FILE* cr8file = fopen("stock.bin", "ab"); // create file if not exist
 	fclose(cr8file);
 	while (1)
 	{

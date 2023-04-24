@@ -1,5 +1,5 @@
 #include "necessaryIncludes.h"
-
+// Tan Jun Xian
 void displayMember()
 {
 	system("cls");
@@ -985,13 +985,21 @@ void updateMemberStatus()
 					"Member ID: %s\n"
 					"Member name: %s\n"
 					"Member status: %s\n"
-					"\nEnter new status: ",
+					"\nEnter new status (-1 to cancel): ",
 					member.member_id,
 					member.name,
 					member.status
 				);
 
 				scanf(" %s", member.status);
+
+				if (checkSentinent(member.status))
+				{
+					fclose(fp);
+					fclose(temp);
+					remove("temp.txt");
+					return;
+				}
 			}
 			fprintf(temp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 				member.member_id,
@@ -1052,7 +1060,7 @@ int printMemberMenu()
 
 void member()
 {
-	FILE* cr8file = fopen("member.txt", "a");
+	FILE* cr8file = fopen("member.txt", "a"); // create file if not exist
 	fclose(cr8file);
 	while (1)
 	{
