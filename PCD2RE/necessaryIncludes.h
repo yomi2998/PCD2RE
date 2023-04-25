@@ -55,7 +55,7 @@ typedef struct {
 void IDGet(char* ID, const char* Imodule, const char* action)
 {
 	printf("Enter %s ID to %s (-1 to cancel): ", Imodule, action);
-	scanf( "%10s", ID);
+	scanf(" %10s", ID);
 	while (getchar() != '\n');
 }
 int checkSentinent(char* str) // check user input "-1" then will exit session
@@ -81,6 +81,26 @@ void IDGen(char* ID, const char* name) // generate ID for member and staff
 	for (i = 6; i < 10; i++)
 		temp[i] = rand() % 26 + 65;
 	strcpy(ID, temp);
+}
+
+int validationStockName(const char* name)
+{
+	int bracket = 0;
+	for (size_t i = 0; i < strlen(name); i++)
+	{
+		if (name[i] == '(')
+			++bracket;
+		if (name[i] == ')')
+			++bracket;
+		if (islower(name[i]))
+		{
+			if (i == 0)
+				return 0;
+			if (name[i - 1] == ' ' || name[i - 1] == '/' || name[i - 1] == '(')
+				return 0;
+		}
+	}
+	return bracket % 2 == 0;
 }
 
 int validationName(const char* name)

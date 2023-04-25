@@ -180,11 +180,11 @@ void editStock()
 								remove("temp.bin");
 								return;
 							}
-							if (!validationName(stock.name))
+							if (!validationStockName(stock.name))
 							{
 								printf("Incorrect name format! Please try again.\n");
 							}
-						} while (!validationName(stock.name));
+						} while (!validationStockName(stock.name));
 						break;
 					case 2:
 						printf("Enter new stock category (-1 to cancel): ");
@@ -413,7 +413,7 @@ void deleteStock()
 			printf("Stock item not found! Please try again.\n");
 			remove("temp.bin");
 		}
-		else
+		else if (yN == 'Y')
 		{
 			remove("stock.bin");
 			rename("temp.bin", "stock.bin");
@@ -478,11 +478,11 @@ void addStock()
 			{
 				return;
 			}
-			if (!validationName(stock.name))
+			if (!validationStockName(stock.name))
 			{
 				printf("Invalid name format! Please try again.\n");
 			}
-		} while (!validationName(stock.name));
+		} while (!validationStockName(stock.name));
 
 		printf("Enter stock category (-1 to cancel): ");
 		scanf(" %[^\n]", stock.category);
@@ -609,11 +609,11 @@ void addStock()
 					{
 						return;
 					}
-					if (!validationName(stock.name))
+					if (!validationStockName(stock.name))
 					{
 						printf("Incorrect name format! Please try again.\n");
 					}
-				} while (!validationName(stock.name));
+				} while (!validationStockName(stock.name));
 				break;
 			case 2:
 				printf("Enter new stock category (-1 to cancel): ");
@@ -734,6 +734,7 @@ void updateStockSale()
 	{
 		FILE* fp = fopen("stock.bin", "rb");
 		FILE* temp = fopen("temp.bin", "wb");
+		char yN;
 		if (fp == NULL)
 		{
 			printf("Error cannot open the file.\n");
@@ -762,7 +763,6 @@ void updateStockSale()
 				printf("Stock ID: %s\n", stock.stock_id);
 				printf("Stock name: %s\n", stock.name);
 				printf("Stock for sale: %c\n", stock.forSale);
-				char yN;
 				do
 				{
 					printf("Update stock to %s? (Y/N):", stock.forSale == 'Y' ? "not for sale" : "for sale");
@@ -775,8 +775,8 @@ void updateStockSale()
 					else if (yN == 'Y')
 					{
 						stock.forSale = stock.forSale == 'Y' ? 'N' : 'Y';
-						fwrite(&stock, sizeof(stock), 1, temp);
 					}
+					fwrite(&stock, sizeof(stock), 1, temp);
 				} while (yN != 'Y' && yN != 'N');
 			}
 			else
@@ -791,7 +791,7 @@ void updateStockSale()
 			remove("temp.txt");
 			system("pause");
 		}
-		else
+		else if (yN == 'Y')
 		{
 			fclose(fp), fclose(temp);
 			remove("stock.bin");
