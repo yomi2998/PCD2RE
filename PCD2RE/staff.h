@@ -154,7 +154,7 @@ void editStaff()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Staff staff;
 		char line[256];
 		memset(line, 0, sizeof(line));
@@ -166,9 +166,9 @@ void editStaff()
 			system("pause");
 			return;
 		}
-		temp = fopen("new_staff.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_staff.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_staff.txt file\n");
 			system("pause");
 			return;
 		}
@@ -176,7 +176,7 @@ void editStaff()
 		IDGet(staff_id, "staff", "edit");
 		if (checkSentinent(staff_id)) {
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_staff.txt");
 			return;
 		}
@@ -235,7 +235,7 @@ void editStaff()
 					scanf(" %s", choice);
 					if (checkSentinent(choice)) {
 						fclose(fp);
-						fclose(temp);
+						fclose(new_fp);
 						remove("new_staff.txt");
 						return;
 					}
@@ -245,7 +245,7 @@ void editStaff()
 						scanf(" %s", choice);
 						if (checkSentinent(choice)) {
 							fclose(fp);
-							fclose(temp);
+							fclose(new_fp);
 							remove("new_staff.txt");
 							return;
 						}
@@ -415,7 +415,7 @@ void editStaff()
 				}
 				fprintf
 				(
-					temp,
+					new_fp,
 					"%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 					staff.staff_id,
 					staff.name,
@@ -432,12 +432,12 @@ void editStaff()
 				);
 			}
 			else {
-				fprintf(temp, "%s", line);
+				fprintf(new_fp, "%s", line);
 			}
 		}
 
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 
 		if (!found) {
 			printf("Staff not found! Please try again\n");
@@ -458,7 +458,7 @@ void deleteStaff()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Staff staff;
 		char line[256];
 		memset(line, 0, sizeof(line));
@@ -472,9 +472,9 @@ void deleteStaff()
 			return;
 		}
 
-		temp = fopen("new_staff.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_staff.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_staff.txt file\n");
 			system("pause");
 			return;
 		}
@@ -482,7 +482,7 @@ void deleteStaff()
 		IDGet(staff_id, "staff", "delete");
 		if (checkSentinent(staff_id)) {
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_staff.txt");
 			return;
 		}
@@ -510,12 +510,12 @@ void deleteStaff()
 				found = 1;
 			}
 			else {
-				fprintf(temp, "%s", line);
+				fprintf(new_fp, "%s", line);
 			}
 		}
 
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 
 		if (!found) {
 			printf("Staff not found! Please try again\n");
@@ -929,7 +929,7 @@ void updateStaffPosition()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Staff staff;
 		char line[256];
 		int found = 0;
@@ -946,9 +946,9 @@ void updateStaffPosition()
 			fclose(fp);
 			return;
 		}
-		temp = fopen("new_staff.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_staff.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_staff.txt file\n");
 			fclose(fp);
 			system("pause");
 			return;
@@ -991,12 +991,12 @@ void updateStaffPosition()
 				if (checkSentinent(staff.position))
 				{
 					fclose(fp);
-					fclose(temp);
+					fclose(new_fp);
 					remove("new_staff.txt");
 					return;
 				}
 			}
-			fprintf(temp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
+			fprintf(new_fp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 				staff.staff_id,
 				staff.name,
 				staff.gender,
@@ -1012,7 +1012,7 @@ void updateStaffPosition()
 			if (found)break;
 		}
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 		remove("staff.txt");
 		rename("new_staff.txt", "staff.txt");
 		if (!found) {

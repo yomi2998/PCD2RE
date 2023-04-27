@@ -96,8 +96,8 @@ void editStock()
 	{
 		displayStock();
 		FILE* fp = fopen("stock.bin", "rb");
-		FILE* temp = fopen("new_stock.bin", "wb");
-		if (fp == NULL || temp == NULL)
+		FILE* new_fp = fopen("new_stock.bin", "wb");
+		if (fp == NULL || new_fp == NULL)
 		{
 			printf("Fail to open stock.bin\n");
 			system("pause");
@@ -111,7 +111,7 @@ void editStock()
 		if (checkSentinent(stock_id))
 		{
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_stock.bin");
 			return;
 		}
@@ -149,7 +149,7 @@ void editStock()
 					scanf(" %s", choice);
 					if (checkSentinent(choice)) {
 						fclose(fp);
-						fclose(temp);
+						fclose(new_fp);
 						remove("new_stock.bin");
 						return;
 					}
@@ -159,7 +159,7 @@ void editStock()
 						scanf(" %s", choice);
 						if (checkSentinent(choice)) {
 							fclose(fp);
-							fclose(temp);
+							fclose(new_fp);
 							remove("new_stock.bin");
 							return;
 						}
@@ -176,7 +176,7 @@ void editStock()
 							if (checkSentinent(stock.name))
 							{
 								fclose(fp);
-								fclose(temp);
+								fclose(new_fp);
 								remove("new_stock.bin");
 								return;
 							}
@@ -192,7 +192,7 @@ void editStock()
 						if (checkSentinent(stock.category))
 						{
 							fclose(fp);
-							fclose(temp);
+							fclose(new_fp);
 							remove("new_stock.bin");
 							return;
 						}
@@ -203,7 +203,7 @@ void editStock()
 						if (checkSentinent(stock.description))
 						{
 							fclose(fp);
-							fclose(temp);
+							fclose(new_fp);
 							remove("new_stock.bin");
 							return;
 						}
@@ -299,7 +299,7 @@ void editStock()
 					} while (yN != 'Y' && yN != 'N');
 					if (yN == 'Y')
 					{
-						fwrite(&stock, sizeof(stock), 1, temp);
+						fwrite(&stock, sizeof(stock), 1, new_fp);
 						break;
 					}
 					else
@@ -310,11 +310,11 @@ void editStock()
 			}
 			else
 			{
-				fwrite(&stock, sizeof(stock), 1, temp);
+				fwrite(&stock, sizeof(stock), 1, new_fp);
 			}
 		}
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 		if (!found)
 		{
 			printf("Stock item not found! Please try again.\n");
@@ -336,8 +336,8 @@ void deleteStock()
 	{
 		displayStock();
 		FILE* fp = fopen("stock.bin", "rb");
-		FILE* temp = fopen("new_stock.bin", "wb");
-		if (fp == NULL || temp == NULL)
+		FILE* new_fp = fopen("new_stock.bin", "wb");
+		if (fp == NULL || new_fp == NULL)
 		{
 			printf("Fail to open stock.bin\n");
 			system("pause");
@@ -351,7 +351,7 @@ void deleteStock()
 		if (checkSentinent(stock_id))
 		{
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_stock.bin");
 			return;
 		}
@@ -398,16 +398,16 @@ void deleteStock()
 				} while (yN != 'Y' && yN != 'N');
 				if (yN == 'N')
 				{
-					fwrite(&stock, sizeof(stock), 1, temp);
+					fwrite(&stock, sizeof(stock), 1, new_fp);
 				}
 			}
 			else
 			{
-				fwrite(&stock, sizeof(stock), 1, temp);
+				fwrite(&stock, sizeof(stock), 1, new_fp);
 			}
 		}
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 		if (!found)
 		{
 			printf("Stock item not found! Please try again.\n");
@@ -733,7 +733,7 @@ void updateStockSale()
 	while (1)
 	{
 		FILE* fp = fopen("stock.bin", "rb");
-		FILE* temp = fopen("new_stock.bin", "wb");
+		FILE* new_fp = fopen("new_stock.bin", "wb");
 		char yN;
 		if (fp == NULL)
 		{
@@ -749,7 +749,7 @@ void updateStockSale()
 		if (checkSentinent(stock_id))
 		{
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_stock.txt");
 			return;
 		}
@@ -776,24 +776,24 @@ void updateStockSale()
 					{
 						stock.forSale = stock.forSale == 'Y' ? 'N' : 'Y';
 					}
-					fwrite(&stock, sizeof(stock), 1, temp);
+					fwrite(&stock, sizeof(stock), 1, new_fp);
 				} while (yN != 'Y' && yN != 'N');
 			}
 			else
 			{
-				fwrite(&stock, sizeof(stock), 1, temp);
+				fwrite(&stock, sizeof(stock), 1, new_fp);
 			}
 		}
 		if (!found)
 		{
 			printf("Stock ID not found, please try again.\n");
-			fclose(fp), fclose(temp);
+			fclose(fp), fclose(new_fp);
 			remove("new_stock.txt");
 			system("pause");
 		}
 		else if (yN == 'Y')
 		{
-			fclose(fp), fclose(temp);
+			fclose(fp), fclose(new_fp);
 			remove("stock.bin");
 			rename("new_stock.bin", "stock.bin");
 			printf("Stock updated successfully!\n");

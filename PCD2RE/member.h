@@ -154,7 +154,7 @@ void editMember()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Member member;
 		char line[256];
 		memset(line, 0, sizeof(line));
@@ -167,9 +167,9 @@ void editMember()
 			return;
 		}
 
-		temp = fopen("new_member.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_member.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_member.txt file\n");
 			system("pause");
 			return;
 		}
@@ -179,7 +179,7 @@ void editMember()
 
 		if (checkSentinent(member_id)) {
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_member.txt");
 			return;
 		}
@@ -238,7 +238,7 @@ void editMember()
 					scanf(" %s", choice);
 					if (checkSentinent(choice)) {
 						fclose(fp);
-						fclose(temp);
+						fclose(new_fp);
 						remove("new_member.txt");
 						return;
 					}
@@ -248,7 +248,7 @@ void editMember()
 						scanf(" %s", choice);
 						if (checkSentinent(choice)) {
 							fclose(fp);
-							fclose(temp);
+							fclose(new_fp);
 							remove("new_member.txt");
 							return;
 						}
@@ -418,7 +418,7 @@ void editMember()
 				}
 				fprintf
 				(
-					temp,
+					new_fp,
 					"%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 					member.member_id,
 					member.name,
@@ -435,12 +435,12 @@ void editMember()
 				);
 			}
 			else {
-				fprintf(temp, "%s", line);
+				fprintf(new_fp, "%s", line);
 			}
 		}
 
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 
 		if (!found) {
 			printf("Member not found! Please try again\n");
@@ -461,7 +461,7 @@ void deleteMember()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Member member;
 		char line[256];
 		memset(line, 0, sizeof(line));
@@ -475,9 +475,9 @@ void deleteMember()
 			return;
 		}
 
-		temp = fopen("new_member.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_member.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_member.txt file\n");
 			system("pause");
 			return;
 		}
@@ -487,7 +487,7 @@ void deleteMember()
 
 		if (checkSentinent(member_id)) {
 			fclose(fp);
-			fclose(temp);
+			fclose(new_fp);
 			remove("new_member.txt");
 			return;
 		}
@@ -515,12 +515,12 @@ void deleteMember()
 				found = 1;
 			}
 			else {
-				fprintf(temp, "%s", line);
+				fprintf(new_fp, "%s", line);
 			}
 		}
 
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 
 		if (!found) {
 			printf("Member not found! Please try again\n");
@@ -935,7 +935,7 @@ void updateMemberStatus()
 {
 	while (1)
 	{
-		FILE* fp, * temp;
+		FILE* fp, * new_fp;
 		Member member;
 		char line[256];
 		int found = 0;
@@ -952,9 +952,9 @@ void updateMemberStatus()
 			fclose(fp);
 			return;
 		}
-		temp = fopen("new_member.txt", "w");
-		if (temp == NULL) {
-			printf("Error creating temporary file\n");
+		new_fp = fopen("new_member.txt", "w");
+		if (new_fp == NULL) {
+			printf("Error creating new_member.txt file\n");
 			fclose(fp);
 			system("pause");
 			return;
@@ -997,12 +997,12 @@ void updateMemberStatus()
 				if (checkSentinent(member.status))
 				{
 					fclose(fp);
-					fclose(temp);
+					fclose(new_fp);
 					remove("new_member.txt");
 					return;
 				}
 			}
-			fprintf(temp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
+			fprintf(new_fp, "%s|%s|%c|%s|%s|%s|%s|%s|%.2lf|%d-%d-%d\n",
 				member.member_id,
 				member.name,
 				member.gender,
@@ -1018,7 +1018,7 @@ void updateMemberStatus()
 			if (found)break;
 		}
 		fclose(fp);
-		fclose(temp);
+		fclose(new_fp);
 		remove("member.txt");
 		rename("new_member.txt", "member.txt");
 		if (!found) {
