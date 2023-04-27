@@ -166,7 +166,7 @@ void editStaff()
 			system("pause");
 			return;
 		}
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_staff.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			system("pause");
@@ -177,7 +177,7 @@ void editStaff()
 		if (checkSentinent(staff_id)) {
 			fclose(fp);
 			fclose(temp);
-			remove("temp.txt");
+			remove("new_staff.txt");
 			return;
 		}
 
@@ -236,7 +236,7 @@ void editStaff()
 					if (checkSentinent(choice)) {
 						fclose(fp);
 						fclose(temp);
-						remove("temp.txt");
+						remove("new_staff.txt");
 						return;
 					}
 					int choice_int = atoi(choice);
@@ -246,7 +246,7 @@ void editStaff()
 						if (checkSentinent(choice)) {
 							fclose(fp);
 							fclose(temp);
-							remove("temp.txt");
+							remove("new_staff.txt");
 							return;
 						}
 						choice_int = atoi(choice);
@@ -441,12 +441,12 @@ void editStaff()
 
 		if (!found) {
 			printf("Staff not found! Please try again\n");
-			remove("temp.txt");
+			remove("new_staff.txt");
 		}
 		else
 		{
 			remove("staff.txt");
-			rename("temp.txt", "staff.txt");
+			rename("new_staff.txt", "staff.txt");
 
 			printf("Staff information updated successfully!\n");
 		}
@@ -472,7 +472,7 @@ void deleteStaff()
 			return;
 		}
 
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_staff.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			system("pause");
@@ -483,7 +483,7 @@ void deleteStaff()
 		if (checkSentinent(staff_id)) {
 			fclose(fp);
 			fclose(temp);
-			remove("temp.txt");
+			remove("new_staff.txt");
 			return;
 		}
 
@@ -519,7 +519,7 @@ void deleteStaff()
 
 		if (!found) {
 			printf("Staff not found! Please try again\n");
-			remove("temp.txt");
+			remove("new_staff.txt");
 		}
 		else
 		{
@@ -532,16 +532,16 @@ void deleteStaff()
 					system("pause");
 					return;
 				}
-				if (rename("temp.txt", "staff.txt") != 0) {
+				if (rename("new_staff.txt", "staff.txt") != 0) {
 					printf("Error renaming file\n");
-					remove("temp.txt");
+					remove("new_staff.txt");
 					system("pause");
 					return;
 				}
 				printf("Staff deleted successfully!\n");
 			}
 			else {
-				remove("temp.txt");
+				remove("new_staff.txt");
 				printf("Deletion canceled\n");
 			}
 		}
@@ -946,7 +946,7 @@ void updateStaffPosition()
 			fclose(fp);
 			return;
 		}
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_staff.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			fclose(fp);
@@ -992,7 +992,7 @@ void updateStaffPosition()
 				{
 					fclose(fp);
 					fclose(temp);
-					remove("temp.txt");
+					remove("new_staff.txt");
 					return;
 				}
 			}
@@ -1014,7 +1014,7 @@ void updateStaffPosition()
 		fclose(fp);
 		fclose(temp);
 		remove("staff.txt");
-		rename("temp.txt", "staff.txt");
+		rename("new_staff.txt", "staff.txt");
 		if (!found) {
 			printf("Staff not found! Please try again\n");
 		}

@@ -167,7 +167,7 @@ void editMember()
 			return;
 		}
 
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_member.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			system("pause");
@@ -180,7 +180,7 @@ void editMember()
 		if (checkSentinent(member_id)) {
 			fclose(fp);
 			fclose(temp);
-			remove("temp.txt");
+			remove("new_member.txt");
 			return;
 		}
 
@@ -239,7 +239,7 @@ void editMember()
 					if (checkSentinent(choice)) {
 						fclose(fp);
 						fclose(temp);
-						remove("temp.txt");
+						remove("new_member.txt");
 						return;
 					}
 					int choice_int = atoi(choice);
@@ -249,7 +249,7 @@ void editMember()
 						if (checkSentinent(choice)) {
 							fclose(fp);
 							fclose(temp);
-							remove("temp.txt");
+							remove("new_member.txt");
 							return;
 						}
 						choice_int = atoi(choice);
@@ -444,12 +444,12 @@ void editMember()
 
 		if (!found) {
 			printf("Member not found! Please try again\n");
-			remove("temp.txt");
+			remove("new_member.txt");
 		}
 		else
 		{
 			remove("member.txt");
-			rename("temp.txt", "member.txt");
+			rename("new_member.txt", "member.txt");
 
 			printf("Member information updated successfully!\n");
 		}
@@ -475,7 +475,7 @@ void deleteMember()
 			return;
 		}
 
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_member.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			system("pause");
@@ -488,7 +488,7 @@ void deleteMember()
 		if (checkSentinent(member_id)) {
 			fclose(fp);
 			fclose(temp);
-			remove("temp.txt");
+			remove("new_member.txt");
 			return;
 		}
 
@@ -524,7 +524,7 @@ void deleteMember()
 
 		if (!found) {
 			printf("Member not found! Please try again\n");
-			remove("temp.txt");
+			remove("new_member.txt");
 		}
 		else
 		{
@@ -538,16 +538,16 @@ void deleteMember()
 					system("pause");
 					return;
 				}
-				if (rename("temp.txt", "member.txt") != 0) {
+				if (rename("new_member.txt", "member.txt") != 0) {
 					printf("Error renaming file\n");
-					remove("temp.txt");
+					remove("new_member.txt");
 					system("pause");
 					return;
 				}
 				printf("Member deleted successfully!\n");
 			}
 			else {
-				remove("temp.txt");
+				remove("new_member.txt");
 				printf("Deletion canceled\n");
 			}
 		}
@@ -952,7 +952,7 @@ void updateMemberStatus()
 			fclose(fp);
 			return;
 		}
-		temp = fopen("temp.txt", "w");
+		temp = fopen("new_member.txt", "w");
 		if (temp == NULL) {
 			printf("Error creating temporary file\n");
 			fclose(fp);
@@ -998,7 +998,7 @@ void updateMemberStatus()
 				{
 					fclose(fp);
 					fclose(temp);
-					remove("temp.txt");
+					remove("new_member.txt");
 					return;
 				}
 			}
@@ -1020,7 +1020,7 @@ void updateMemberStatus()
 		fclose(fp);
 		fclose(temp);
 		remove("member.txt");
-		rename("temp.txt", "member.txt");
+		rename("new_member.txt", "member.txt");
 		if (!found) {
 			printf("Member not found! Please try again\n");
 		}
