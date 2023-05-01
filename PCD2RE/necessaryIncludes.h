@@ -7,7 +7,7 @@
 #include <time.h>
 #pragma warning (disable:4996)
 #pragma warning(disable: 6031)
-
+// Siew Jun Hong
 typedef struct
 {
 	int day;
@@ -24,7 +24,7 @@ typedef struct {
 	char phone_number[20];
 	char address[100];
 	float salary;
-	char position[16];
+	char position[32];
 	Date birth;
 } Staff;
 
@@ -43,7 +43,7 @@ typedef struct {
 
 typedef struct {
 	char stock_id[11];
-	char name[31];
+	char name[41];
 	char category[21];
 	char description[100];
 	int quantity;

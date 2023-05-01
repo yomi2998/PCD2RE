@@ -2,12 +2,12 @@
 #include "member.h"
 #include "staff.h"
 #include "stock.h"
-#include <time.h>
 /*
 main.c
 This is the main function of the program
-It will print the main menu and call the function of the selected module
+It will print the main menu and call the function of the selected module from included files.
 necessaryIncludes.h provides some basic information check, structures, ID generator and more.
+structure arrays are completely avoided to overcome stack overflow.
 */
 int printMenu()
 {
@@ -27,6 +27,7 @@ int printMenu()
 	scanf(" %d", &selection);
 	while (selection < 1 || selection > 4)
 	{
+		while (getchar() != '\n');
 		printf("Invalid input. Please try again: ");
 		scanf(" %d", &selection);
 	}
@@ -53,7 +54,7 @@ void main()
 		case 4:
 			printf("See you next time\n");
 			system("pause");
-			exit(0);
+			return;
 			break;
 		}
 	}

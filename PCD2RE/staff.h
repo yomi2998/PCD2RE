@@ -11,11 +11,11 @@ void displayStaff()
 		return;
 	}
 	Staff staff;
-	dprintf(102);
+	dprintf(116);
 	int count = 0;
 	printf
 	(
-		"|%-15s|%-30s|%-8s|%-15s|%-17s|%-10s|\n",
+		"|%-15s|%-30s|%-8s|%-15s|%-31s|%-10s|\n",
 		"Staff ID",
 		"Staff name",
 		"Gender",
@@ -23,7 +23,7 @@ void displayStaff()
 		"Position",
 		"Salary"
 	);
-	dprintf(102);
+	dprintf(116);
 	while
 		(
 			fscanf
@@ -48,7 +48,7 @@ void displayStaff()
 		++count;
 		printf
 		(
-			"|%-15s|%-30s|%-8c|%-15s|%-17s|RM %-7.2f|\n",
+			"|%-15s|%-30s|%-8c|%-15s|%-31s|RM %-7.2f|\n",
 			staff.staff_id,
 			staff.name,
 			staff.gender,
@@ -58,7 +58,7 @@ void displayStaff()
 		);
 	}
 	fclose(f);
-	dprintf(102);
+	dprintf(116);
 	printf("Total staffs : %d\n", count);
 	system("pause");
 }
@@ -883,15 +883,15 @@ void displayStaffPosition()
 		return;
 	}
 	Staff staff;
-	dprintf(66);
+	dprintf(80);
 	printf
 	(
-		"|%-15s|%-30s|%-17s|\n",
+		"|%-15s|%-30s|%-31s|\n",
 		"Staff ID",
 		"Staff name",
 		"Position"
 	);
-	dprintf(66);
+	dprintf(80);
 	while
 		(
 			fscanf
@@ -915,14 +915,14 @@ void displayStaffPosition()
 	{
 		printf
 		(
-			"|%-15s|%-30s|%-17s|\n",
+			"|%-15s|%-30s|%-31s|\n",
 			staff.staff_id,
 			staff.name,
 			staff.position
 		);
 	}
 	fclose(f);
-	dprintf(66);
+	dprintf(80);
 }
 
 void updateStaffPosition()

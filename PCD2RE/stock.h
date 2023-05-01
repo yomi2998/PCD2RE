@@ -12,10 +12,10 @@ void displayStock()
 		return;
 	}
 	Stock stock;
-	dprintf(107);
+	dprintf(117);
 	printf
 	(
-		"|%-15s|%-30s|%-20s|%-10s|%-10s|%-15s|\n",
+		"|%-15s|%-40s|%-20s|%-10s|%-10s|%-15s|\n",
 		"Stock ID",
 		"Name",
 		"Category",
@@ -23,13 +23,13 @@ void displayStock()
 		"For sale?",
 		"Price"
 	);
-	dprintf(107);
+	dprintf(117);
 	while (fread(&stock, sizeof(stock), 1, fp) == 1)
 	{
 		++count;
 		printf
 		(
-			"|%-15s|%-30s|%-20s|%-10d|%-10c|RM %-12.2F|\n",
+			"|%-15s|%-40s|%-20s|%-10d|%-10c|RM %-12.2F|\n",
 			stock.stock_id,
 			stock.name,
 			stock.category,
@@ -38,7 +38,7 @@ void displayStock()
 			stock.price
 		);
 	}
-	dprintf(107);
+	dprintf(117);
 	printf("Total stocks: %d\n", count);
 
 	fclose(fp);
@@ -146,7 +146,8 @@ void editStock()
 						stock.import_date.year
 					);
 					char choice[3];
-					scanf(" %s", choice);
+					scanf(" %2s", choice);
+					while (getchar() != '\n');
 					if (checkSentinent(choice)) {
 						fclose(fp);
 						fclose(new_fp);
@@ -156,7 +157,8 @@ void editStock()
 					int choice_int = atoi(choice);
 					while (choice_int < 1 || choice_int > 7) {
 						printf("Invalid choice! Please enter again: ");
-						scanf(" %s", choice);
+						scanf(" %2s", choice);
+						while (getchar() != '\n');
 						if (checkSentinent(choice)) {
 							fclose(fp);
 							fclose(new_fp);
@@ -172,7 +174,8 @@ void editStock()
 						{
 							memset(stock.name, 0, sizeof(stock.name));
 							printf("Enter new stock name (-1 to cancel): ");
-							scanf(" %[^\n]", stock.name);
+							scanf(" %40[^\n]", stock.name);
+							while (getchar() != '\n');
 							if (checkSentinent(stock.name))
 							{
 								fclose(fp);
@@ -188,7 +191,8 @@ void editStock()
 						break;
 					case 2:
 						printf("Enter new stock category (-1 to cancel): ");
-						scanf(" %[^\n]", stock.category);
+						scanf(" %20[^\n]", stock.category);
+						while (getchar() != '\n');
 						if (checkSentinent(stock.category))
 						{
 							fclose(fp);
@@ -199,7 +203,8 @@ void editStock()
 						break;
 					case 3:
 						printf("Enter new stock description (-1 to cancel): ");
-						scanf(" %[^\n]", stock.description);
+						scanf(" %99[^\n]", stock.description);
+						while (getchar() != '\n');
 						if (checkSentinent(stock.description))
 						{
 							fclose(fp);
@@ -213,6 +218,7 @@ void editStock()
 						{
 							printf("Enter new stock quantity: ");
 							scanf(" %d", &stock.quantity);
+							while (getchar() != '\n');
 							if (stock.quantity < 0)
 								printf("Quantity must be 0 or more! Please try again.\n");
 						} while (stock.quantity < 0);
@@ -222,6 +228,7 @@ void editStock()
 						{
 							printf("Enter new stock price: ");
 							scanf(" %f", &stock.price);
+							while (getchar() != '\n');
 							if (stock.price < 0)
 								printf("Price must be 0 or more! Please try again.\n");
 						} while (stock.price < 0);
@@ -237,6 +244,7 @@ void editStock()
 						{
 							printf("Change stock to %s?(Y/N): ", stock.forSale == 'Y' ? "not for sale" : "for sale");
 							scanf(" %c", &yN);
+							while (getchar() != '\n');
 							yN = toupper(yN);
 							if (yN != 'Y' && yN != 'N')
 							{
@@ -254,6 +262,7 @@ void editStock()
 							memset(&stock.import_date, 0, sizeof(stock.import_date));
 							printf("Enter new stock import date (format: dd-mm-yyyy): ");
 							scanf(" %d-%d-%d", &stock.import_date.day, &stock.import_date.month, &stock.import_date.year);
+							while (getchar() != '\n');
 							if (!validationStockImport(stock.import_date))
 							{
 								printf("Incorrect date format! Make sure you've entered correct date.\n");
@@ -287,6 +296,7 @@ void editStock()
 					{
 						printf("Apply the modifications?(Y/N): ");
 						scanf(" %c", &yN);
+						while (getchar() != '\n');
 						yN = toupper(yN);
 						if (yN != 'Y' && yN != 'N')
 						{
@@ -386,6 +396,7 @@ void deleteStock()
 				{
 					printf("Confirm delete?(Y/N): ");
 					scanf(" %c", &yN);
+					while (getchar() != '\n');
 					yN = toupper(yN);
 					if (yN != 'Y' && yN != 'N')
 					{
@@ -442,8 +453,10 @@ int printStockMenu()
 	);
 	int selection;
 	scanf(" %d", &selection);
+	while (getchar() != '\n');
 	while (selection < 1 || selection > 7)
 	{
+		while (getchar() != '\n');
 		printf("Invalid input. Please try again: ");
 		scanf(" %d", &selection);
 	}
@@ -473,7 +486,8 @@ void addStock()
 		{
 			memset(stock.name, 0, sizeof(stock.name));
 			printf("Enter stock name (-1 to cancel): ");
-			scanf(" %[^\n]", stock.name);
+			scanf(" %40[^\n]", stock.name);
+			while (getchar() != '\n');
 			if (checkSentinent(stock.name))
 			{
 				return;
@@ -485,14 +499,16 @@ void addStock()
 		} while (!validationStockName(stock.name));
 
 		printf("Enter stock category (-1 to cancel): ");
-		scanf(" %[^\n]", stock.category);
+		scanf(" %20[^\n]", stock.category);
+		while (getchar() != '\n');
 		if (checkSentinent(stock.category))
 		{
 			return;
 		}
 
 		printf("Enter stock description (-1 to cancel): ");
-		scanf(" %[^\n]", stock.description);
+		scanf(" %99[^\n]", stock.description);
+		while (getchar() != '\n');
 		if (checkSentinent(stock.description))
 		{
 			return;
@@ -501,6 +517,7 @@ void addStock()
 		{
 			printf("Enter stock quantity: ");
 			scanf(" %d", &stock.quantity);
+			while (getchar() != '\n');
 			if (stock.quantity < 0)
 			{
 				printf("Stock quantity must be at least 0 or more! Please try again.\n");
@@ -510,6 +527,7 @@ void addStock()
 		{
 			printf("Enter stock price (RM): ");
 			scanf(" %f", &stock.price);
+			while (getchar() != '\n');
 			if (stock.price < 0)
 			{
 				printf("Stock price must be at least 0 or more! Please try again.\n");
@@ -525,6 +543,7 @@ void addStock()
 			{
 				printf("Enter stock for sale (Y/N) : ");
 				scanf(" %c", &stock.forSale);
+				while (getchar() != '\n');
 				stock.forSale = toupper(stock.forSale);
 				if (stock.forSale != 'Y' && stock.forSale != 'N')
 				{
@@ -536,6 +555,7 @@ void addStock()
 		{
 			printf("Enter stock import date (dd-mm-yyyy): ");
 			scanf(" %d-%d-%d", &stock.import_date.day, &stock.import_date.month, &stock.import_date.year);
+			while (getchar() != '\n');
 			if (!validationStockImport(stock.import_date))
 			{
 				printf("Wrong import date format! Please try again.\n");
@@ -570,8 +590,10 @@ void addStock()
 			printf("Confirm register? (y/n): ");
 			char select;
 			scanf(" %c", &select);
+			while (getchar() != '\n');
 			select = tolower(select);
 			while (select != 'y' && select != 'n') {
+				while (getchar() != '\n');
 				printf("Invalid choice! Please enter again: ");
 				scanf(" %c", &select);
 			}
@@ -581,7 +603,8 @@ void addStock()
 			}
 			printf("Which to edit? (1-7, -1 to cancel): ");
 			char choice[3];
-			scanf(" %s", choice);
+			scanf(" %2s", choice);
+			while (getchar() != '\n');
 			if (checkSentinent(choice)) {
 				fclose(fp);
 				return;
@@ -589,8 +612,8 @@ void addStock()
 			int choice_int = atoi(choice);
 			while (choice_int < 1 || choice_int > 9) {
 				printf("Invalid choice! Please enter again: ");
-				choice[2] = '\0';
-				scanf(" %s", choice);
+				scanf(" %2s", choice);
+				while (getchar() != '\n');
 				if (checkSentinent(choice)) {
 					fclose(fp);
 					return;
@@ -604,7 +627,8 @@ void addStock()
 				{
 					memset(stock.name, 0, sizeof(stock.name));
 					printf("Enter new stock name (-1 to cancel): ");
-					scanf(" %[^\n]", stock.name);
+					scanf(" %40[^\n]", stock.name);
+					while (getchar() != '\n');
 					if (checkSentinent(stock.name))
 					{
 						return;
@@ -617,7 +641,8 @@ void addStock()
 				break;
 			case 2:
 				printf("Enter new stock category (-1 to cancel): ");
-				scanf(" %[^\n]", stock.category);
+				scanf(" %20[^\n]", stock.category);
+				while (getchar() != '\n');
 				if (checkSentinent(stock.category))
 				{
 					return;
@@ -625,7 +650,8 @@ void addStock()
 				break;
 			case 3:
 				printf("Enter new stock description (-1 to cancel): ");
-				scanf(" %[^\n]", stock.description);
+				scanf(" %99[^\n]", stock.description);
+				while (getchar() != '\n');
 				if (checkSentinent(stock.description))
 				{
 					return;
@@ -636,6 +662,7 @@ void addStock()
 				{
 					printf("Enter new stock quantity: ");
 					scanf(" %d", &stock.quantity);
+					while (getchar() != '\n');
 					if (stock.quantity < 0)
 						printf("Quantity must be 0 or more! Please try again.\n");
 				} while (stock.quantity < 0);
@@ -645,6 +672,7 @@ void addStock()
 				{
 					printf("Enter new stock price: ");
 					scanf(" %f", &stock.price);
+					while (getchar() != '\n');
 					if (stock.price < 0)
 						printf("Price must be 0 or more! Please try again.\n");
 				} while (stock.price < 0);
@@ -660,6 +688,7 @@ void addStock()
 				{
 					printf("Change stock to %s?(Y/N): ", stock.forSale == 'Y' ? "not for sale" : "for sale");
 					scanf(" %c", &yN);
+					while (getchar() != '\n');
 					yN = toupper(yN);
 					if (yN != 'Y' && yN != 'N')
 					{
@@ -677,6 +706,7 @@ void addStock()
 					memset(&stock.import_date, 0, sizeof(stock.import_date));
 					printf("Enter new stock import date (format: dd-mm-yyyy): ");
 					scanf(" %d-%d-%d", &stock.import_date.day, &stock.import_date.month, &stock.import_date.year);
+					while (getchar() != '\n');
 					if (!validationStockImport(stock.import_date))
 					{
 						printf("Incorrect date format! Make sure you've entered correct date.\n");
@@ -704,26 +734,26 @@ void displayStockSale()
 		return;
 	}
 	Stock stock;
-	dprintf(59);
+	dprintf(69);
 	printf
 	(
-		"|%-15s|%-30s|%-10s|\n",
+		"|%-15s|%-40s|%-10s|\n",
 		"Stock ID",
 		"Name",
 		"For sale?"
 	);
-	dprintf(59);
+	dprintf(69);
 	while (fread(&stock, sizeof(stock), 1, fp) == 1)
 	{
 		printf
 		(
-			"|%-15s|%-30s|%-10c|\n",
+			"|%-15s|%-40s|%-10c|\n",
 			stock.stock_id,
 			stock.name,
 			stock.forSale
 		);
 	}
-	dprintf(59);
+	dprintf(69);
 	fclose(fp);
 	system("pause");
 }
@@ -767,6 +797,7 @@ void updateStockSale()
 				{
 					printf("Update stock to %s? (Y/N):", stock.forSale == 'Y' ? "not for sale" : "for sale");
 					scanf(" %c", &yN);
+					while (getchar() != '\n');
 					yN = toupper(yN);
 					if (yN != 'Y' && yN != 'N')
 					{
