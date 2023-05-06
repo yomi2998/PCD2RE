@@ -1015,7 +1015,6 @@ void updateMemberStatus()
 				member.birth.day,
 				member.birth.month,
 				member.birth.year);
-			if (found)break;
 		}
 		fclose(fp);
 		fclose(new_fp);

@@ -1009,7 +1009,6 @@ void updateStaffPosition()
 				staff.birth.day,
 				staff.birth.month,
 				staff.birth.year);
-			if (found)break;
 		}
 		fclose(fp);
 		fclose(new_fp);
